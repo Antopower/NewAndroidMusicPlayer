@@ -20,7 +20,6 @@ import java.util.HashMap;
  */
 public class MainFragment extends Fragment {
 
-    private ListView lv;
     final String MEDIA_PATH = Environment.getExternalStorageDirectory()
             .getPath() + "/";
     private ArrayList<HashMap<String, String>> songsList = new ArrayList<>();
@@ -29,14 +28,13 @@ public class MainFragment extends Fragment {
         // Required empty public constructor
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
         ArrayList<HashMap<String, String>> array = getPlayList();
 
-        lv = (ListView) view.findViewById(R.id.listView);
+        ListView lv = (ListView) view.findViewById(R.id.listView);
         try {
             SimpleAdapter adapter = new SimpleAdapter(getActivity(), array,
                     R.layout.list_item, new String[]{"songTitle"}, new int[]{
@@ -95,7 +93,7 @@ public class MainFragment extends Fragment {
     private void addSongToList(File song) {
         String mp3Pattern = ".mp3";
         if (song.getName().endsWith(mp3Pattern)) {
-            HashMap<String, String> songMap = new HashMap<String, String>();
+            HashMap<String, String> songMap = new HashMap<>();
             songMap.put("songTitle",
                     song.getName().substring(0, (song.getName().length() - 4)));
             songMap.put("songPath", song.getPath());
